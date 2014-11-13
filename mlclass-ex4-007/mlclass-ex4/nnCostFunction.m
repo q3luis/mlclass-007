@@ -63,14 +63,20 @@ Theta2_grad = zeros(size(Theta2));
 %
 
 
+yAux=zeros(m,num_labels);
+for i=1:m 
+  yAux(i,y(i))=1;
+endfor
 
+a1=[ones(m,1),X];
+z2= a1*Theta1';
+a2=[ones(m,1), sigmoid(z2)];
+z3= a2*Theta2';
+h =sigmoid(z3);
 
-
-
-
-
-
-
+J=(1/m)*sum(sum((-yAux).*log(h)-(1-yAux).*log(1-h),2));
+reg= (lambda/(2*m))*(sum(sum(Theta1(:,2:end).^2))+sum(sum(Theta2(:,2:end).^2)));
+J=J+reg;
 
 
 
