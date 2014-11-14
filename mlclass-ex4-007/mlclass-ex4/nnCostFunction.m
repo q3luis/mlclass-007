@@ -79,10 +79,15 @@ reg= (lambda/(2*m))*(sum(sum(Theta1(:,2:end).^2))+sum(sum(Theta2(:,2:end).^2)));
 J=J+reg;
 
 
+sigma3=h-yAux;
+sigma2=sigma3*Theta2.*sigmoidGradient([ones(m,1) z2]);
+
+delta1=sigma2'*a1;
+delta2=sigma3'*a2;
 
 
-
-
+Theta1_grad = delta1 (:, 2:end)./m + (lambda/m)*[zeros(size(Theta1,1), 1) Theta1(:, 2:end)];
+Theta2_grad = delta2 (:, 2:end)./m + (lambda/m)*[zeros(size(Theta2,1), 1) Theta2(:, 2:end)]
 
 
 
