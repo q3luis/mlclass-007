@@ -16,8 +16,9 @@ sim = 0;
 %
 %
 
+Aux=x1-x2;
 
-
+sim=exp(-((Aux'*Aux)/(2*sigma*sigma)));
 
 
 
