@@ -23,11 +23,32 @@ sigma = 0.3;
 %        mean(double(predictions ~= yval))
 %
 
+params=[0.01, 0.03, 0.1, 0.3, 1, 3, 10, 30];
+err=inf;
 
+for C_aux=params
+    for sigma_aux=params
+       
+       model= svmTrain(X, y, C_aux, @(x1, x2) gaussianKernel(x1, x2, sigma_aux)); 
+       predictions = svmPredict(model, Xval);
+       err_aux=mean(double(predictions ~= yval));
 
+       if(err_aux<err)
+          fprintf('old error ');
+          err
+          err=err_aux;
+          C=C_aux;
+          sigma=sigma_aux;
+          fprintf('New error .\n');
+          err 
+       endif
+    endfor
+endfor
 
-
-
+fprintf('C');
+C
+fprintf('sigma');
+sigma
 
 % =========================================================================
 
